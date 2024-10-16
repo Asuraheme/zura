@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "885338700787",
+    "project_id": "fir-estate-e9caf",
+    "storage_bucket": "fir-estate-e9caf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885338700787:android:fde8648135d81e04e3f086",
+        "android_client_info": {
+          "package_name": "com.example.real_estate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyhzgjdyGeMo3-hx9EvNfozJE9foH6_Hk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
