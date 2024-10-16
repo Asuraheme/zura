@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:real_estate/data.dart';
 import 'package:real_estate/filter.dart';
 import 'package:real_estate/detail.dart';
+import 'package:real_estate/models/property_model.dart';
 import 'package:real_estate/setings/setup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -15,6 +16,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   List<Property> properties = getPropertyList();
+  List<PropertyModel> propertyFirebaseList = [];
   String categorte = "All";
   final CollectionReference categortiesItem =
       FirebaseFirestore.instance.collection('categories-label');
@@ -23,6 +25,26 @@ class _SearchState extends State<Search> {
       .where('label', isEqualTo: categorte);
   Query get allinfo => FirebaseFirestore.instance.collection('Property');
   Query get selectedfilter => categorte == "All" ? allinfo : filtered;
+  @override
+  void initState() async {
+    super.initState();
+    propertyFirebaseList = await getPropertyListFromFirebase();
+
+    
+    //this code will
+    /// Listens to changes in the `selectedfilter` Firestore collection and updates
+    /// the `propertyFirebaseList` with the new data. The data is mapped to a list
+    /// of `PropertyModel` objects using the `fromJson` method. The `setState`
+    /// method is called to ensure the UI is updated with the new list.
+    selectedfilter.snapshots().listen((event) {
+      setState(() {
+        propertyFirebaseList = event.docs
+            .map(
+                (e) => PropertyModel.fromJson(e.data() as Map<String, dynamic>))
+            .toList();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

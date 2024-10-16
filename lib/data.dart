@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:real_estate/models/property_model.dart';
+
 class Property {
   String label;
   String name;
@@ -170,4 +173,13 @@ List<Property> getPropertyList() {
       ],
     ),
   ];
+}
+Future<List<PropertyModel>> getPropertyListFromFirebase() async {
+  List<PropertyModel> list = [];
+  await FirebaseFirestore.instance.collection('properties').get().then((querySnapshot) {
+    for (var result in querySnapshot.docs) {
+      list.add(PropertyModel.fromJson(result.data()));
+    }
+  });
+  return list;
 }
