@@ -17,6 +17,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   //List<Property> properties = getPropertyList();
   List<PropertyModel> propertyFirebaseList = [];
+  List<DocumentSnapshot> propertyFirebaseListSnapshot = [];
   String categorte = "All";
   final CollectionReference categortiesItem =
       FirebaseFirestore.instance.collection('categories-label');
@@ -28,6 +29,7 @@ class _SearchState extends State<Search> {
 
   getData() async {
     propertyFirebaseList = await getPropertyListFromFirebase();
+    propertyFirebaseListSnapshot = await getPropertySnapshotsListFromFirebase();
   }
 
   @override
@@ -192,17 +194,17 @@ class _SearchState extends State<Search> {
     for (var i = 0; i < propertyFirebaseList.length; i++) {
       list.add(Hero(
           tag: propertyFirebaseList[i].frontImage as String,
-          child: buildProperty(propertyFirebaseList[i], i)));
+          child: buildProperty(propertyFirebaseList[i], i,propertyFirebaseListSnapshot[i])));
     }
     return list;
   }
 
-  Widget buildProperty(PropertyModel property, int index) {
+  Widget buildProperty(PropertyModel property, int index,DocumentSnapshot snapshot) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Detail(property: property)),
+          MaterialPageRoute(builder: (context) => Detail(property: property,snapshot: snapshot,)),
         );
       },
       child: Card(

@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //import 'package:real_estate/data.dart';
 import 'package:real_estate/models/property_model.dart';
 
 class Detail extends StatelessWidget {
+  final DocumentSnapshot snapshot;
   final PropertyModel property;
 
-  const Detail({super.key, required this.property});
+  const Detail({super.key, required this.property, required this.snapshot});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,8 @@ class Detail extends StatelessWidget {
               height: size.height * 0.5,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(property.frontImage??'type ur link here'),
+                  image:
+                      NetworkImage(property.frontImage ?? 'type ur link here'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -230,7 +233,8 @@ class Detail extends StatelessWidget {
                                 width: 65,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(property.ownerImage??'type ur link here'),
+                                    image: NetworkImage(property.ownerImage ??
+                                        'type ur link here'),
                                     fit: BoxFit.cover,
                                   ),
                                   shape: BoxShape.circle,

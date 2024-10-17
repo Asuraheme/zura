@@ -194,3 +194,15 @@ Future<List<PropertyModel>> getPropertyListFromFirebase() async {
   });
   return list;
 }
+Future<List<DocumentSnapshot>> getPropertySnapshotsListFromFirebase() async {
+  List<DocumentSnapshot> list = [];
+  await FirebaseFirestore.instance
+      .collection('Property')
+      .get()
+      .then((querySnapshot) {
+    for (var result in querySnapshot.docs) {
+      list.add(result);
+    }
+  });
+  return list;
+}
