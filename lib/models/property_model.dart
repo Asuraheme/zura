@@ -32,6 +32,7 @@ class PropertyModel {
     description = json['description'];
     ownerImage = json['ownerImage'];
     frontImage = json['frontImage'];
+    images = json['images'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -40,6 +41,12 @@ class PropertyModel {
     data['location'] = location;
     data['price'] = price;
     data['frontImage'] = frontImage;
+    data['ownerImage'] = ownerImage;
+    data['review'] = review;
+    data['sqm'] = sqm;
+    data['description'] = description;
+    data['label'] = label;
+    data['images'] = images;
     return data;
   }
 }

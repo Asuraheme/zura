@@ -20,7 +20,7 @@ class Detail extends StatelessWidget {
               height: size.height * 0.5,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(property.frontImage!),
+                  image: NetworkImage(property.frontImage??'type ur link here'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -230,7 +230,7 @@ class Detail extends StatelessWidget {
                                 width: 65,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(property.ownerImage!),
+                                    image: NetworkImage(property.ownerImage??'type ur link here'),
                                     fit: BoxFit.cover,
                                   ),
                                   shape: BoxShape.circle,
@@ -427,7 +427,7 @@ class Detail extends StatelessWidget {
             Radius.circular(10),
           ),
           image: DecorationImage(
-            image: AssetImage(url),
+            image: NetworkImage(url),
             fit: BoxFit.cover,
           ),
         ),

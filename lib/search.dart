@@ -217,7 +217,7 @@ class _SearchState extends State<Search> {
           height: 210,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(property.frontImage as String),
+              image: NetworkImage(property.frontImage ?? 'type ur image url'),
               fit: BoxFit.cover,
             ),
           ),
