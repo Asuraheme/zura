@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate/data.dart';
+//import 'package:real_estate/data.dart';
+import 'package:real_estate/models/property_model.dart';
 
 class Detail extends StatelessWidget {
-  final Property property;
+  final PropertyModel property;
 
   const Detail({super.key, required this.property});
 
@@ -14,12 +15,12 @@ class Detail extends StatelessWidget {
       body: Stack(
         children: [
           Hero(
-            tag: property.frontImage,
+            tag: property.frontImage!,
             child: Container(
               height: size.height * 0.5,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(property.frontImage),
+                  image: AssetImage(property.frontImage!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -101,7 +102,7 @@ class Detail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        property.name,
+                        property.name!,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 32,
@@ -147,7 +148,7 @@ class Detail extends StatelessWidget {
                             width: 4,
                           ),
                           Text(
-                            property.location,
+                            property.location!,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -229,7 +230,7 @@ class Detail extends StatelessWidget {
                                 width: 65,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(property.ownerImage),
+                                    image: AssetImage(property.ownerImage!),
                                     fit: BoxFit.cover,
                                   ),
                                   shape: BoxShape.circle,
@@ -339,7 +340,7 @@ class Detail extends StatelessWidget {
                         bottom: 24,
                       ),
                       child: Text(
-                        property.description,
+                        property.description!,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[500],
@@ -369,7 +370,7 @@ class Detail extends StatelessWidget {
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
-                          children: buildPhotos(property.images),
+                          children: buildPhotos(property.images!),
                         ),
                       ),
                     ),

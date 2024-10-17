@@ -1,24 +1,45 @@
 class PropertyModel {
+  String? label;
   String? name;
+  String? price;
   String? location;
-  int? price;
+  String? sqm;
+  String? review;
+  String? description;
   String? frontImage;
+  String? ownerImage;
+  List<String>? images;
 
-  PropertyModel({this.name, this.location, this.price,this.frontImage});
+  PropertyModel(
+      {this.label,
+      this.name,
+      this.price,
+      this.location,
+      this.sqm,
+      this.review,
+      this.description,
+      this.frontImage,
+      this.ownerImage,
+      this.images});
 
   PropertyModel.fromJson(Map<String, dynamic> json) {
+    label = json['label'];
     name = json['name'];
-    location = json['location'];
     price = json['price'];
+    location = json['location'];
+    sqm = json['sqm'];
+    review = json['review'];
+    description = json['description'];
+    ownerImage = json['ownerImage'];
     frontImage = json['frontImage'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['location'] = this.location;
-    data['price'] = this.price;
-    data['frontImage'] = this.frontImage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['location'] = location;
+    data['price'] = price;
+    data['frontImage'] = frontImage;
     return data;
   }
 }

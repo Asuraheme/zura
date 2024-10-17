@@ -15,7 +15,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  List<Property> properties = getPropertyList();
+  //List<Property> properties = getPropertyList();
   List<PropertyModel> propertyFirebaseList = [];
   String categorte = "All";
   final CollectionReference categortiesItem =
@@ -25,12 +25,16 @@ class _SearchState extends State<Search> {
       .where('label', isEqualTo: categorte);
   Query get allinfo => FirebaseFirestore.instance.collection('Property');
   Query get selectedfilter => categorte == "All" ? allinfo : filtered;
-  @override
-  void initState() async {
-    super.initState();
-    propertyFirebaseList = await getPropertyListFromFirebase();
 
-    
+  getData() async {
+    propertyFirebaseList = await getPropertyListFromFirebase();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+
     //this code will
     /// Listens to changes in the `selectedfilter` Firestore collection and updates
     /// the `propertyFirebaseList` with the new data. The data is mapped to a list
@@ -185,15 +189,15 @@ class _SearchState extends State<Search> {
 
   List<Widget> buildProperties() {
     List<Widget> list = [];
-    for (var i = 0; i < properties.length; i++) {
+    for (var i = 0; i < propertyFirebaseList.length; i++) {
       list.add(Hero(
-          tag: properties[i].frontImage,
-          child: buildProperty(properties[i], i)));
+          tag: propertyFirebaseList[i].frontImage as String,
+          child: buildProperty(propertyFirebaseList[i], i)));
     }
     return list;
   }
 
-  Widget buildProperty(Property property, int index) {
+  Widget buildProperty(PropertyModel property, int index) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -213,7 +217,7 @@ class _SearchState extends State<Search> {
           height: 210,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(property.frontImage),
+              image: AssetImage(property.frontImage as String),
               fit: BoxFit.cover,
             ),
           ),
@@ -263,7 +267,7 @@ class _SearchState extends State<Search> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          property.name,
+                          property.name as String,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -271,7 +275,7 @@ class _SearchState extends State<Search> {
                           ),
                         ),
                         Text(
-                          r"$" + property.price,
+                          r"$" + property.price!,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -297,7 +301,7 @@ class _SearchState extends State<Search> {
                               width: 4,
                             ),
                             Text(
-                              property.location,
+                              property.location as String,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
