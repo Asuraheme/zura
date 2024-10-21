@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 //import 'package:real_estate/data.dart';
 import 'package:real_estate/models/property_model.dart';
+import 'package:real_estate/provider/fav_provider.dart';
+import 'package:real_estate/setings/setup.dart';
 
 class Detail extends StatelessWidget {
   final DocumentSnapshot snapshot;
@@ -11,6 +14,7 @@ class Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = FavoriteProvider.of(context);
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -120,10 +124,19 @@ class Detail extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: Icon(
-                            Icons.favorite,
-                            color: Colors.yellow[700],
-                            size: 20,
+                          child: InkWell(
+                            onTap: () {
+                              provider.toggleFavorite(snapshot);
+                            },
+                            child: Icon(
+                              provider.isExist(snapshot)
+                                  ? Iconsax.heart5
+                                  : Iconsax.heart,
+                              color: provider.isExist(snapshot)
+                                  ? Colors.red
+                                  : Colors.black,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ),
@@ -276,10 +289,10 @@ class Detail extends StatelessWidget {
                                   color: Colors.yellow[700]?.withOpacity(0.1),
                                   shape: BoxShape.circle,
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Icon(
                                     Icons.phone,
-                                    color: Colors.yellow[700],
+                                    color: primerycolor,
                                     size: 20,
                                   ),
                                 ),

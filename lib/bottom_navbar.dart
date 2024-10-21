@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:real_estate/fav_screen.dart';
 import 'package:real_estate/search.dart';
 import 'package:real_estate/setings/setup.dart';
 
@@ -19,7 +20,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     pages = [
       const Search(),
       navBarIem(Iconsax.home5),
-      navBarIem(Iconsax.heart5),
+      const FavoriteScreen(),
       navBarIem(Iconsax.message5),
     ];
     super.initState();
@@ -55,7 +56,8 @@ class _BottomNavbarState extends State<BottomNavbar> {
             label: "Residential",
           ),
           BottomNavigationBarItem(
-            icon: Icon(selectedindex == 1 ? Iconsax.home : Iconsax.home_1),
+            icon: Icon(
+                selectedindex == 1 ? Iconsax.paperclip5 : Iconsax.paperclip_2),
             label: "office",
           ),
           BottomNavigationBarItem(

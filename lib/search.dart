@@ -16,6 +16,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   //List<Property> properties = getPropertyList();
+
   List<PropertyModel> propertyFirebaseList = [];
   List<DocumentSnapshot> propertyFirebaseListSnapshot = [];
   String categorte = "All";
@@ -55,7 +56,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kbackgroundColor,
       appBar: AppBar(
         backgroundColor: primerycolor,
         title: const Text(
@@ -70,7 +71,7 @@ class _SearchState extends State<Search> {
           IconButton(
               onPressed: () {},
               icon: const Icon(
-                Iconsax.filter,
+                Iconsax.filter5,
                 color: Colors.white,
               ))
         ],
@@ -194,17 +195,23 @@ class _SearchState extends State<Search> {
     for (var i = 0; i < propertyFirebaseList.length; i++) {
       list.add(Hero(
           tag: propertyFirebaseList[i].frontImage as String,
-          child: buildProperty(propertyFirebaseList[i], i,propertyFirebaseListSnapshot[i])));
+          child: buildProperty(
+              propertyFirebaseList[i], i, propertyFirebaseListSnapshot[i])));
     }
     return list;
   }
 
-  Widget buildProperty(PropertyModel property, int index,DocumentSnapshot snapshot) {
+  Widget buildProperty(
+      PropertyModel property, int index, DocumentSnapshot snapshot) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Detail(property: property,snapshot: snapshot,)),
+          MaterialPageRoute(
+              builder: (context) => Detail(
+                    property: property,
+                    snapshot: snapshot,
+                  )),
         );
       },
       child: Card(
